@@ -1,11 +1,17 @@
-﻿$destinationDrive = Read-Host("Enter the destination Drive")
+﻿# This program performs basic artifact collection for Incident Response
+# Written by Katie Zurowski, 2019
+# Published Jan 2021 to GitHub
+
+
+$destinationDrive = Read-Host("Enter the destination Drive")
 
 #Case information
 $investigator= Read-Host("Enter Investigator Name")
-Write-Output "Collection Script Output Files for CFRS 664 Project 2" | Out-File $destinationDrive\caseInfo.txt 
+Write-Output "Collection Script Output Files" | Out-File $destinationDrive\caseInfo.txt 
 Write-Output "Collection Start Time:" | Out-File $destinationDrive\caseInfo.txt -append -nonewline
 Get-Date | Out-File $destinationDrive\caseInfo.txt -append
 Write-Output "Investigator:" $investigator | Out-File $destinationDrive\caseInfo.txt -append
+Write-Output "This collection program was created by Katie Zurowski for coursework at George Mason University"
 
 #OS data
 Get-WmiObject win32_operatingsystem | Out-File $destinationDrive\osInfo.txt
