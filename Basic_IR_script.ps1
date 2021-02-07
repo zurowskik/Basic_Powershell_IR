@@ -2,7 +2,7 @@
 # Written by Katie Zurowski, 2019
 # Published Jan 2021 to GitHub
 
-
+#This is the destination drive where your output files will be created
 $destinationDrive = Read-Host("Enter the destination Drive")
 
 #Case information
@@ -25,8 +25,8 @@ Get-NetAdapter | ConvertTo-html| Out-File $destinationDrive\MACInfo.html
 Get-NetIPAddress | Out-File $destinationDrive\IPInterface.txt
 
 #Services and Processes
-#Get-Service | ConvertTo-html | Out-File $destinationDrive\services.html
-#Get-Process | ConvertTo-Html | Out-File $destinationDrive\processes.html
+Get-Service | ConvertTo-html | Out-File $destinationDrive\services.html
+Get-Process | ConvertTo-Html | Out-File $destinationDrive\processes.html
 
 #Event log data
 Get-EventLog -logname System | ConvertTo-html | Out-File $destinationDrive\sysEvents.html
@@ -37,9 +37,8 @@ Get-EventLog -logname Application | ConvertTo-html | Out-File $destinationDrive\
 Get-ChildItem -Path C:\ -Recurse | Select-Object -Property fullname, creationtime, lastaccesstime, lastwrittentime, length |ConvertTo-html | Out-File $destinationDrive\directoryinfo.html
 Get-ChildItem -path C:\Windows\Prefetch | select-object -Property name, lastwritetime | convertTo-html |out-file $destinationDrive\prefetch.html
 
+#Retreives any hotfixes and patches that are on the device
 Get-HotFix | Out-File $destinationDrive\hotfixes.csv
-
-
 
 #Finishing info: end times and file hashes of generated files
 Write-Output "Collection End Time:" | Out-File $destinationDrive\caseInfo.txt -append -nonewline
